@@ -4,7 +4,7 @@
 /*global $form:true*/
 
 //set Public key for Stripe payments
-Stripe.setPublishableKey( 'pk_test_6pRNASCoBOKtIshFeQd4XMUh' );
+Stripe.setPublishableKey( 'sk_test_MXSsPLCQUvLj0zOOMgRyVcTR' );
 var isSubmit = false;
 $( document ).ready( function() {
     $( '#submittransaction' ).click( function() {

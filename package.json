@@ -1,5 +1,5 @@
 {
-  "name": "restApp",
+  "name": "1UphigherTest",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,8 @@
     "express": "~4.13.3",
     "express-ejs-layouts": "~2.0.0",
     "jsonwebtoken": "~5.5.4",
+    "kerberos": "0.0.17",
+    "mongodb": "^2.1.4",
     "mongoose": "~4.3.5",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",

@@ -1,19 +1,60 @@
-<h1>Transactions page</h1>
-<p>Your token:<span id="token"><%=token%></span></p>
+<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+    <div class="panel panel-primary" >
 
-<h2>Create Stripe Payments</h2>
+        <div class="panel-heading">
+            <div class="panel-title">Transactions page</div>
+        </div>     
 
-<label for="amount">Amount:</label>
-<input type="number" name="amount" id="amount"><br>
-<label for="currency">Currency: </label>
-<input type="text" name="currency" id="currency"><br>
-<label for="cardnumber">Card number </label>
-<input type="text" name="customerid" id="cardnumber" class="card-number"><br>
-<label for="cvc">CVC: </label>
-<input type="number" name="cvc" id="cvc" class="card-cvc"><br>
-<label for="card-expiry-month">Expired Month: </label>
-<input type="number" name="card-expiry-month" id="card-expiry-month" class="card-expiry-month"><br>
-<label for="card-expiry-year">Expired Year: </label>
-<input type="number" name="card-expiry-year" id="card-expiry-year" class="card-expiry-year"><br>
-<p class="payment-errors"></p>
-<input type="button" class="submittransaction" id="submittransaction" value="Submit">
+        <div class="panel-body  >
+        <p style="overflow-wrap: break-word;">Your token: <span id="token" hidden><%=token%></span></p>
+            <input type="hidden" name="userid" value="<%=userid%>" id="userid"/>
+
+            <div style="margin-bottom: 30px" class="input-group">
+                <span class="input-group-addon">$</span>
+                <input class="form-control" type="number" name="amount" id="amount" placeholder="Please enter transaction amount">                                        
+            </div>
+                        
+            <div style="margin-bottom: 30px" class="input-group">
+                <span class="input-group-addon">$</span>
+                <input class="form-control" type="text" name="currency" id="currency" placeholder="Please enter currency. (USD,CAD,INR etc)">                                        
+            </div>
+
+            <div style="margin-bottom: 30px" class="input-group">
+                <span class="input-group-addon">#</span>
+                <input class="form-control card-number" type="text" name="customerid" id="cardnumber" placeholder="Please enter your credit card number">                                        
+            </div>
+
+            <div style="margin-bottom: 30px" class="input-group">
+                <span class="input-group-addon">#</span>
+                <input class="form-control card-cvc" type="number" name="cvc" id="cvc" placeholder="Please enter your CCV number">                                        
+            </div>
+
+        	<div style="margin-bottom: 30px" class="input-group">
+                <span class="input-group-addon">#</span>
+                <input class="form-control card-expiry-month" type="number" name="card-expiry-month" id="card-expiry-month" placeholder="Please enter your card expiry month">                                        
+            </div>
+
+            <div style="margin-bottom: 30px" class="input-group">
+                <span class="input-group-addon">#</span>
+                <input class="form-control card-expiry-year" type="number" name="card-expiry-year" id="card-expiry-year" placeholder="Please enter your card expiry year">                                        
+            </div>
+            
+            <div style="margin-top:10px;" class="form-group">
+                
+            </div>    
+
+            <div style="margin-top:10px" class="form-group">
+                <div class="col-sm-6">
+                    <butto class="btn btn-success pull-right" id="backToDashboard">Back to Dashboard</button>
+                </div>
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-success pull-right" id="submittransaction">Make Payment  </button>
+                </div>
+            </div> 
+        </div>  
+        <div class="panel-footer">
+            <p class="payment-errors"></p>  
+        </div>
+         
+    </div>  
+</div>

@@ -3,6 +3,7 @@
 var User = require( '../models/user.model.js' );
 var jwt = require( 'jsonwebtoken' );
 var config = require( '../config' );
+var StripeCustomer = require('../models/stripecustomer.model.js');
 
 exports.index = function( req, res ) {
 
@@ -12,7 +13,7 @@ exports.index = function( req, res ) {
     }, function( err, user ) {
 
         if ( err ) {
-            throw err;
+            return res.render('error', {message : err, error : {status : 500, stack : ''}});
         }
 
         if ( !user ) {
@@ -24,8 +25,8 @@ exports.index = function( req, res ) {
         else if ( user ) {
             user.comparePassword( req.body.password, function( err, isMatch ) {
                 if ( err ) {
-                    throw err;
-                }
+                    return res.render('error', {message : err, error : {status : 500, stack : ''}});
+                } 
 
                 if(!isMatch) {
                     return res.status( 401 ).json( {
@@ -39,13 +40,18 @@ exports.index = function( req, res ) {
                 var token = jwt.sign( user, config.secret, {
                     expiresIn: 1440 // expires in 24 hours
                 } );
-
-                // return the information including token as JSON
-                res.render( 'transactions', {
-                    token: token,
-                    title: 'Transactions Page'
-                } );
-
+                StripeCustomer.findOne({userid : user._id},function(err, customer){
+                    if ( err ) {
+                        return res.render('error', {message : err, error : {status : 500, stack : ''}});
+                    } 
+                    res.render( 'transactions', {
+                        token: token,
+                        title: 'Transactions Page',
+                        userid : user._id,
+                        ccdetails : customer?true:false
+                    } );
+                })
+                // return the information including token as JSON                
             } );
         }
 
@@ -60,13 +66,13 @@ exports.register = function( req, res ) {
     }, function( err, user ) {
 
         if ( err ) {
-            throw err;
+            return res.render('error', {message : err, error : {status : 500, stack : ''}});
         }
 
         if ( user ) {
             res.json( {
                 success: false,
-                message: 'Register failed. Username is not free'
+                message: 'Register failed. Username is not available'
             } );
         }
         else {
@@ -78,7 +84,7 @@ exports.register = function( req, res ) {
                 if ( err ) {
                     return res.status( 500 ).json( {
                         success: false,
-                        message: 'Registration failed'
+                        message: 'Registration failed due to some internal server error'
                     } );
                 }
 
@@ -91,7 +97,9 @@ exports.register = function( req, res ) {
                 // return the information including token as JSON
                 res.render( 'transactions', {
                     token: token,
-                    title: 'Transactions Page'
+                    title: 'Transactions Page',
+                    userid : user._id,
+                    ccdetails  : false
                 } );
             } );
         }

@@ -1,19 +1,55 @@
-<form action="/authenticate" method="POST">
-    <h1>Login to test page</h1>
-    <label for="name">Name: </label>
-    <input type="text" name="name" id="name">
-    <br>
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password">
-    <input type="submit" value="Login">
-</form>
-
-<form action="/register" method="POST">
-    <h1>Register to test page</h1>
-    <label for="name">Name: </label>
-    <input type="text" name="name" id="name">
-    <br>
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password">
-    <input type="submit" value="Register">
-</form>
+<div class="container">
+    <div class="row">
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6">                    
+            <div class="panel panel-primary" >
+                <div class="panel-heading">
+                    <div class="panel-title">Login</div>
+                </div>     
+                <div class="panel-body" >
+                    <h4>Please enter your username and password</h4>
+                    <form action="/authenticate" method="post">
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon">User Name</span>
+                            <input id="login-username" type="text" class="form-control" name="name" value="" placeholder="email">                                        
+                        </div>
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon">Password</span>
+                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                        </div>
+                        <div style="margin-top:10px" class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-success pull-right">Login  </button>
+                            </div>
+                        </div>
+                    </form>            
+                </div>                             
+            </div>  
+        </div>
+        
+        <div id="registerbox" style="margin-top:50px;" class="mainbox col-md-6">                    
+            <div class="panel panel-primary" >
+                <div class="panel-heading">
+                    <div class="panel-title">Register</div>
+                </div>     
+                <div class="panel-body" >
+                    <h4>Choose your unique username and password to register</h4>
+                    <form action="/register" method="post">
+                        <div style="margin-bottom: 25px" class="input-group">
+                             <span class="input-group-addon">User Name</span>
+                            <input id="login-username" type="text" class="form-control" name="name" value="" placeholder="email">                                        
+                        </div>
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon">Password</span>
+                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                        </div>
+                        <div style="margin-top:10px" class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-success pull-right">Register</button>
+                            </div>
+                        </div>
+                    </form>            
+                </div>                     
+            </div>  
+        </div>
+     </div>
+</div>

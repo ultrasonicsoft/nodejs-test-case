@@ -4,9 +4,14 @@
 /*global $form:true*/
 
 //set Public key for Stripe payments
-Stripe.setPublishableKey( 'sk_test_MXSsPLCQUvLj0zOOMgRyVcTR' );
+Stripe.setPublishableKey( 'pk_test_SnOByhzFpfc6BEV0hP6BGvBc' );
 var isSubmit = false;
 $( document ).ready( function() {
+    
+    $( '#backToDashboard' ).click( function() {
+       location.href='/login';
+    });
+    
     $( '#submittransaction' ).click( function() {
         console.log( 'ok' );
         if ( !isSubmit ) {
@@ -24,7 +29,7 @@ $( document ).ready( function() {
                     // response contains id and card, which contains additional card details
                     var token = response.id;
                     // Insert the token into the form so it gets submitted to the server
-                    $form.append( $( '<input type="hidden" name="stripeToken" />' ).val( token ) );
+                    //$form.append( $( '<input type="hidden" name="stripeToken" />' ).val( token ) );
                     // and submit
                     $.ajax( {
                         url: '/createtransaction',
@@ -35,17 +40,41 @@ $( document ).ready( function() {
                         data: {
                             amount: $( '#amount' ).val(),
                             currency: $( '#currency' ).val(),
-                            token: token
+                            token: token,
+                            userid : $( '#userid' ).val()
                         }
                     } ).done( function( response ) {
                         if ( response.message ) {
                             $( '.payment-errors' ).text( response.message );
                         }
-                    } );
+                    } , function(err){
+                        console.log(err);
+                    });
                 }
 
             } );
         }
 
     } );
+    
+    $("#submittxn").click(function(){
+        if ( !isSubmit ) {
+           $.ajax( {
+                url: '/createtransaction',
+                type: 'POST',
+                headers: {
+                    'x-access-token': $( '#token' ).html()
+                },
+                data: {
+                    userid : $( '#userid' ).val()
+                }
+            } ).done( function( response ) {
+                if ( response.message ) {
+                    $( '.payment-errors' ).text( response.message );
+                }
+            } , function(err){
+                console.log(err);
+            });
+        }
+    })
 } );

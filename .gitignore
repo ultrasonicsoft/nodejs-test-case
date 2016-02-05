@@ -12,3 +12,7 @@ Thumbs.db
 node_modules
 config/conf.d/**/*.json
 dev/
+node_modules
+.env
+Dockerfile
+docker-compose.yml
